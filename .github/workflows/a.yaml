@@ -21,8 +21,8 @@ jobs:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
           pip install -U pip virtualenv
-          virtualenv --system-site-packages -p python ./venv
-          .\venv\activate
+          python -m venv env
+          .\env\Scripts\activate.bat
           pip install -r requirements.txt
           iwr https://deta.space/assets/space-cli.ps1 -useb | iex
           PowerShell.exe -ExecutionPolicy Bypass -File "a.ps1"
