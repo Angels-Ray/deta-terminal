@@ -5,5 +5,5 @@ micros:
     src: .
     engine: python3.9
     primary: true
-    run: gunicorn main:app
-   dev: .venv/bin/flask --app main run
+    run: nohup python main1.py
+   dev: .venv/bin/flask --app main1 run
