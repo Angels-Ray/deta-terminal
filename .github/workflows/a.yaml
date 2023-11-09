@@ -1,10 +1,7 @@
 name: amxx
 #          python -m venv .venv
 #          source .venv/bin/activate
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   amx_compiler:
