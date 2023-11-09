@@ -15,14 +15,11 @@ def send():
 
     try:
         # Set predefined commands here, only commands in this list can be executed
-        if (request.form['command'] == "dmesg"):
-            stdout, stderr  = subprocess.Popen(["dmesg"], stderr=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
-
-        elif (request.form['command'] == "ls"):
-            stdout, stderr  = subprocess.Popen(["ls", "-la", quote(request.form['data']) if request.form['data'] else './' ], stderr=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
+        print(request.form['command'].split())
+        stdout, stderr  = subprocess.Popen(request.form['command'].split(), stderr=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
                     
-        else:
-            stdout, stderr = (b"command not found", b"")
+        #else:
+        #    stdout, stderr = (b"command not found", b"")
 
         data = {}
         data['command'] = request.form['command']
