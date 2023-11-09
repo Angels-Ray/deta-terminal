@@ -7,5 +7,5 @@ app = TelegramClient("heiiii", api_id, api_hash,auto_reconnect=True).start(bot_t
 @app.on(events.NewMessage(pattern="/start",func=lambda e:e.is_private))
 async def Start(message):
     await app.send_message(message.chat_id, "....")
-
+#
 app.run_until_disconnected()
