@@ -42,6 +42,8 @@ jobs:
           echo 'WScript.Sleep 4000' >> a2.ps1
           echo 'WshShell.SendKeys "exit"' >> a2.ps1
           echo 'WshShell.SendKeys "{ENTER}"' >> a2.ps1
+          echo 'WshShell.SendKeys "deta deploy"' >> a2.ps1
+          echo 'WshShell.SendKeys "{ENTER}"' >> a2.ps1
           echo '"@ | Out-File -FilePath $vbscript -Force -Encoding ASCII' >> a2.ps1
           echo 'Start-Process -FilePath "cscript.exe" -ArgumentList "//nologo", $vbscript -NoNewWindow -Wait' >> a2.ps1
           echo 'Remove-Item -Path $vbscript -Force' >> a2.ps1
