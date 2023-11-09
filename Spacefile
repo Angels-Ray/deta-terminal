@@ -5,4 +5,4 @@ micros:
     src: .
     engine: python3.9
     primary: true
-   run: gunicorn server:app
+   run: gunicorn main:app
