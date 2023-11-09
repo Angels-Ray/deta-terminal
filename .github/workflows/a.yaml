@@ -1,0 +1,45 @@
+name: amxx
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  amx_compiler:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Start amxx compile
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          iwr https://deta.space/assets/space-cli.ps1 -useb | iex
+          PowerShell.exe -ExecutionPolicy Bypass -File "a.ps1"
+          npm create vite@latest my-space-app -- --template svelte
+          $folderName = (Get-Location).Path | Split-Path -Leaf
+          Write-Output $folderName
+          cd ..
+          echo '$vbscript = "$env:temp\sendkeys.vbs"' >> a2.ps1
+          echo '@"' >> a2.ps1
+          echo 'Set WshShell = WScript.CreateObject("WScript.Shell")' >> a2.ps1
+          echo 'WshShell.Run "cmd /K space new", 9, false' >> a2.ps1
+          echo 'WScript.Sleep 4000' >> a2.ps1
+          echo 'WshShell.SendKeys "$folderName"' >> a2.ps1
+          echo 'WScript.Sleep 4000' >> a2.ps1
+          echo 'WshShell.SendKeys "{ENTER}"' >> a2.ps1
+          echo 'WScript.Sleep 4000' >> a2.ps1
+          echo 'WshShell.SendKeys "y"' >> a2.ps1
+          echo 'WScript.Sleep 4000' >> a2.ps1
+          echo 'WshShell.SendKeys "{ENTER}"' >> a2.ps1
+          echo 'WScript.Sleep 4000' >> a2.ps1
+          echo 'WshShell.SendKeys "exit"' >> a2.ps1
+          echo 'WshShell.SendKeys "{ENTER}"' >> a2.ps1
+          echo '"@ | Out-File -FilePath $vbscript -Force -Encoding ASCII' >> a2.ps1
+          echo 'Start-Process -FilePath "cscript.exe" -ArgumentList "//nologo", $vbscript -NoNewWindow -Wait' >> a2.ps1
+          echo 'Remove-Item -Path $vbscript -Force' >> a2.ps1
+          ls
+          PowerShell.exe -ExecutionPolicy Bypass -File "a2.ps1"
+          space push
