@@ -1,10 +1,12 @@
 # Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
 v: 0
+icon: ./static/icon.png
 micros:
-  - name: name-app1
-    src: .
+  - name: terminal
+    src: ./
     engine: python3.9
     primary: true
-    public_routes:
-      - "/open"
-    presets:
+    #dev: python maina.py
+    run: uvicorn main:app
+    dev: uvicorn main:app --reload
+    provide_actions: true
