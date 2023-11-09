@@ -17,6 +17,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
+          pip install --upgrade pip
           pip install -U pip virtualenv
           python -m venv env
           .\env\Scripts\activate.bat
