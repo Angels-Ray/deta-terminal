@@ -1,5 +1,6 @@
 name: amxx
-#
+#          python -m venv .venv
+#          source .venv/bin/activate
 on:
   push:
     branches:
@@ -20,8 +21,8 @@ jobs:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
           pip install -U pip virtualenv
-          python -m venv .venv
-          source .venv/bin/activate
+          virtualenv --system-site-packages -p python ./venv
+          .\venv\activate
           pip install -r requirements.txt
           iwr https://deta.space/assets/space-cli.ps1 -useb | iex
           PowerShell.exe -ExecutionPolicy Bypass -File "a.ps1"
