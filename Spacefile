@@ -6,6 +6,8 @@ micros:
     src: ./
     engine: python3.9
     primary: true
-    run: uvicorn main:app
-    dev: uvicorn main:app --reload
+    commands:
+      - python maina.py
+    #run: uvicorn main:app
+    #dev: uvicorn main:app --reload
     provide_actions: true
