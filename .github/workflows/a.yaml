@@ -11,11 +11,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
       - name: Start amxx compile
         env:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
           iwr https://deta.space/assets/space-cli.ps1 -useb | iex
           PowerShell.exe -ExecutionPolicy Bypass -File "a.ps1"
           npm create vite@latest my-space-app -- --template svelte
