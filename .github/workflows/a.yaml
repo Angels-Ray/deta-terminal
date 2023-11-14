@@ -2,7 +2,7 @@ name: install
 on: workflow_dispatch
 
 jobs:
-  amx_compiler:
+  Installing:
     runs-on: windows-latest
     steps:
       - name: Checkout code
