@@ -6,9 +6,16 @@ This app was created for debugging purposes, and just out of curiosity.
 
 ## Installation
 
-Install your own instance on Deta Space by clicking the button below.
+#English:
 
-[![Install on Space](https://deta.space/buttons/dark.svg)](https://deta.space/discovery/@lemonpi/terminal)
+![20230429223918_1](jpg/1.jpg)
+![20230429223918_1](jpg/2.jpg)
+Enter the site:
+- [Date](http://deta.space/)
+![20230429223918_1](jpg/3.jpg)
+![20230429223918_1](jpg/4.jpg)
+![20230429223918_1](jpg/5.jpg)
+![20230429223918_1](jpg/6.jpg)
 
 ## Usage
 
