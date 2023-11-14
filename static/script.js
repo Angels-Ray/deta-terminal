@@ -11,15 +11,15 @@ async function sendCommand(command) {
         output.innerHTML = "";
         return;
     }
-    // if (args[0] == "cd" && args.length > 1) {
-    //     cwd = args[1];
-    // }
+    if (args[0] == "cd" && args.length > 1) {
+        cwd = args[1];
+    }
     const response = await fetch("/api/command", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            args: args,
-            cwd: cwd,
+            command,
+            cwd,
         }),
     })
     return await response.json();

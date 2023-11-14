@@ -1,7 +1,8 @@
 import os
+import shlex
 import subprocess
 
-from deta_space_actions import Actions, ActionsMiddleware, Input, InputType, custom_view
+from deta_space_actions import Actions, ActionsMiddleware, DetailView, Input, InputType
 from deta_space_actions.actions import HandlerInput
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
@@ -13,7 +14,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="./static"), name="static")
 actions = Actions()
 app.add_middleware(ActionsMiddleware, actions=actions)
-CommandView = custom_view("/static/view.html")
+# CommandView = custom_view("/static/view.html")
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -25,10 +26,11 @@ async def index() -> HTMLResponse:
 @app.post("/api/command", response_model=Result)
 async def command(cmd: Command) -> Result:
     original_cwd = os.getcwd()
+    args = shlex.split(cmd.command)
     try:
         os.chdir(cmd.cwd)
         result = subprocess.run(
-            cmd.args,
+            args=args,
             capture_output=True,
             text=True,
             check=False,
@@ -42,13 +44,13 @@ async def command(cmd: Command) -> Result:
         stdout = ""
         stderr = str(exc)
         returncode = 1
-        args = cmd.args
     new_cwd = os.getcwd()
     os.chdir(original_cwd)
     return Result(
         stdout=stdout,
         stderr=stderr,
         returncode=returncode,
+        command=cmd.command,
         args=args,
         cwd=new_cwd,
     )
@@ -64,10 +66,13 @@ async def command(cmd: Command) -> Result:
         ),
     ],
 )
-async def command_action(payload: HandlerInput) -> CommandView:
-    args = payload.get("command", "").split()
-    result = await command(Command(args=args))
-    return CommandView(result.model_dump())
+async def command_action(payload: HandlerInput) -> DetailView:
+    result = await command(Command(command=payload.get("command", "")))
+    return DetailView(
+        text=f"{result.stdout}\n{result.stderr}",
+        title=f"{result.cwd}$ {result.command}",
+    )
+    # return CommandView(result.model_dump())
 
 
 # TODO: output and command history using base
