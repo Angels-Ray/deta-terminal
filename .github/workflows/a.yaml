@@ -1,6 +1,4 @@
-name: amxx
-#          python -m venv .venv
-#          source .venv/bin/activate
+name: install
 on: workflow_dispatch
 
 jobs:
