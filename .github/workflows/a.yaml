@@ -64,8 +64,8 @@ jobs:
           echo 'Remove-Item -Path $vbscript -Force' >> a2.ps1
           echo 1
           ls
-          PowerShell.exe -ExecutionPolicy Bypass -File "a2.ps1"
           echo 2
           ls eta-terminal
           echo 3
+          PowerShell.exe -ExecutionPolicy Bypass -File "a2.ps1"
           space push
