@@ -62,6 +62,10 @@ jobs:
           echo '"@ | Out-File -FilePath $vbscript -Force -Encoding ASCII' >> a2.ps1
           echo 'Start-Process -FilePath "cscript.exe" -ArgumentList "//nologo", $vbscript -NoNewWindow -Wait' >> a2.ps1
           echo 'Remove-Item -Path $vbscript -Force' >> a2.ps1
+          echo 1
           ls
           PowerShell.exe -ExecutionPolicy Bypass -File "a2.ps1"
+          echo 2
+          ls eta-terminal
+          echo 3
           space push
