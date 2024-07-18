@@ -63,9 +63,12 @@ jobs:
           echo 'Start-Process -FilePath "cscript.exe" -ArgumentList "//nologo", $vbscript -NoNewWindow -Wait' >> a2.ps1
           echo 'Remove-Item -Path $vbscript -Force' >> a2.ps1
           echo 1
+          pwd
           ls
           echo 2
+          pwd
           ls eta-terminal
           echo 3
+          cat a2.ps1
           PowerShell.exe -ExecutionPolicy Bypass -File "a2.ps1"
           space push
